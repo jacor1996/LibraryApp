@@ -1,0 +1,13 @@
+﻿@model System.Collections.Generic.IEnumerable<Library.Entities.Author>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>title</h2>
+
+@foreach (var author in Model)
+{
+    <p>@author.Name @author.Surname</p>
+}
