@@ -7,7 +7,7 @@ using Library.Entities;
 
 namespace Library.Repositories.Interfaces
 {
-    interface IAuthorRepository
+    public interface IAuthorRepository : IDisposable
     {
         IEnumerable<Author> GetAuthors();
 
@@ -18,5 +18,7 @@ namespace Library.Repositories.Interfaces
         void UpdateAuthor(Author author);
 
         void DeleteAuthor(int id);
+
+        void Save();
     }
 }
