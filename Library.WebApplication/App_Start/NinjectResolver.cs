@@ -16,6 +16,7 @@ namespace Library.WebApplication.App_Start
         public NinjectResolver()
         {
             _kernel = new StandardKernel();
+            _kernel.Unbind<ModelValidatorProvider>();
             AddBindings();
         }
 

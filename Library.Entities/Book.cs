@@ -17,6 +17,6 @@ namespace Library.Entities
         [StringLength(256)]
         public string Category { get; set; }
 
-        public ICollection<Author> Authors { get; set; }
+        public Author Author { get; set; }
     }
 }

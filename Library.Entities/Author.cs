@@ -16,7 +16,6 @@ namespace Library.Entities
         [StringLength(256)]
         public string Surname { get; set; }
 
-        public int BookId { get; set; }
-        public Book Book { get; set; }
+        public ICollection<Book> Books { get; set; }
     }
 }
