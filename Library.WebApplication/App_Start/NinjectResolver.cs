@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Library.Entities;
 using Ninject;
 using Library.Repositories.Implementation;
 using Library.Repositories.Interfaces;
+using Ninject.Web.Common;
 
 namespace Library.WebApplication.App_Start
 {
@@ -32,7 +34,9 @@ namespace Library.WebApplication.App_Start
 
         public void AddBindings()
         {
-            _kernel.Bind<IAuthorRepository>().To<AuthorRepository>();
+            _kernel.Bind<IRepository<Author>>()
+                .To<Repository<Author>>()
+                .InRequestScope();
         }
     }
 }

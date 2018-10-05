@@ -10,15 +10,15 @@ namespace Library.WebApplication.Controllers
 {
     public class AuthorsController : Controller
     {
-        private IAuthorRepository authorRepository;
-        public AuthorsController(IAuthorRepository repository)
+        private IRepository<Author> authorRepository;
+        public AuthorsController(IRepository<Author> repository)
         {
             authorRepository = repository;
         }
         // GET: Authors
         public ActionResult Index()
         {
-            return View(authorRepository.GetAuthors());
+            return View(authorRepository.GetAll());
         }
 
         // Create
@@ -32,7 +32,7 @@ namespace Library.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                authorRepository.CreateAuthor(author);
+                authorRepository.Create(author);
                 authorRepository.Save();
 
                 return RedirectToAction("Index");

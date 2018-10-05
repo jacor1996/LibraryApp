@@ -9,40 +9,39 @@ using Library.Repositories.Interfaces;
 
 namespace Library.Repositories.Implementation
 {
-    public class AuthorRepository : IAuthorRepository
+    public class Repository<T> : IRepository<T> where T : DataObject
     {
         private LibraryContext _context;
 
-        public AuthorRepository()
+        public Repository()
         {
-            _context = new LibraryContext();
+            _context = new LibraryContext();        
         }
 
-        public IEnumerable<Author> GetAuthors()
+        public IEnumerable<T> GetAll()
         {
-            return _context.Authors.ToList();
+            return _context.Set<T>();
         }
 
-        public Author GetAuthorById(int id)
+        public T GetById(int id)
         {
-            return _context.Authors.Find(id);
+            return _context.Set<T>().Find(id);
         }
 
-        public void CreateAuthor(Author author)
+        public void Create(T entity)
         {
-            _context.Authors.Add(author);
-            Save();
+            _context.Set<T>().Add(entity);
         }
 
-        public void UpdateAuthor(Author author)
+        public void Update(T entity)
         {
-            _context.Entry(author).State = EntityState.Modified;
+            _context.Entry(entity).State = EntityState.Modified;
         }
 
-        public void DeleteAuthor(int id)
+        public void Delete(int id)
         {
-            Author authorToDelete = GetAuthorById(id);
-            _context.Authors.Remove(authorToDelete);
+            T entity = GetById(id);
+            _context.Set<T>().Remove(entity);
         }
 
         public void Save()
