@@ -40,5 +40,59 @@ namespace Library.WebApplication.Controllers
 
             return View(author);
         }
+
+        public ActionResult Edit(int id)
+        {
+            Author author = authorRepository.GetById(id);
+
+            if (author != null)
+            {
+                return View(author);
+            }
+
+            return HttpNotFound($"Author with id = {id} does not exist.");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Author author)
+        {
+            if (ModelState.IsValid)
+            {
+                authorRepository.Update(author);
+                authorRepository.Save();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(author);
+        }
+
+
+        public ActionResult Delete(int id)
+        {
+            Author author = authorRepository.GetById(id);
+
+            if (author != null)
+            {
+                authorRepository.Delete(id);
+                authorRepository.Save();
+
+                return RedirectToAction("Index");
+            }
+
+            return HttpNotFound($"Author with id = {id} does not exist.");
+        }
+
+        public ActionResult Details(int id)
+        {
+            Author author = authorRepository.GetById(id);
+
+            if (author != null)
+            {
+                return View(author);
+            }
+
+            return HttpNotFound($"Author with id = {id} does not exist.");
+        }
     }
 }
