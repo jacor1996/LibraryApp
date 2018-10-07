@@ -31,6 +31,9 @@
             defaultBooks[0].Author = defaultAuthors[0];
             defaultBooks[1].Author = defaultAuthors[1];
 
+            defaultBooks[0].Author.Id = defaultAuthors[0].Id;
+            defaultBooks[1].Author.Id = defaultAuthors[1].Id;
+
             context.Books.AddRange(defaultBooks);
             context.Authors.AddRange(defaultAuthors);
 
