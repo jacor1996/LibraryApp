@@ -23,11 +23,13 @@ namespace Library.WebApplication.Controllers
             return View(bookRepository.GetAll());
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Create(Book book)
         {
@@ -42,6 +44,7 @@ namespace Library.WebApplication.Controllers
             return View(book);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             Book book = bookRepository.GetById(id);
@@ -53,6 +56,7 @@ namespace Library.WebApplication.Controllers
             return HttpNotFound($"Book with specified id = {id} does not exist.");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public ActionResult Edit(Book book)
         {
@@ -67,6 +71,7 @@ namespace Library.WebApplication.Controllers
             return View(book);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             Book book = bookRepository.GetById(id);
