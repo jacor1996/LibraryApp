@@ -16,18 +16,21 @@ namespace Library.WebApplication.Controllers
             authorRepository = repository;
         }
         // GET: Authors
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(authorRepository.GetAll());
         }
 
         // Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create(Author author)
         {
             if (ModelState.IsValid)
@@ -41,6 +44,7 @@ namespace Library.WebApplication.Controllers
             return View(author);
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
             Author author = authorRepository.GetById(id);
@@ -54,6 +58,7 @@ namespace Library.WebApplication.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(Author author)
         {
             if (ModelState.IsValid)
@@ -67,7 +72,7 @@ namespace Library.WebApplication.Controllers
             return View(author);
         }
 
-
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int id)
         {
             Author author = authorRepository.GetById(id);
@@ -83,6 +88,7 @@ namespace Library.WebApplication.Controllers
             return HttpNotFound($"Author with id = {id} does not exist.");
         }
 
+        [AllowAnonymous]
         public ActionResult Details(int id)
         {
             Author author = authorRepository.GetById(id);

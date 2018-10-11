@@ -18,6 +18,7 @@ namespace Library.WebApplication.Controllers
         }
 
         // GET: Books
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View(bookRepository.GetAll());
@@ -87,6 +88,7 @@ namespace Library.WebApplication.Controllers
             return HttpNotFound($"Book with specified id = {id} does not exist.");
         }
 
+        [AllowAnonymous]
         public ActionResult Details(int id)
         {
             Book book = bookRepository.GetById(id);
