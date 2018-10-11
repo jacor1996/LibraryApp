@@ -49,8 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Author.cs" />
+    <Compile Include="AuthorPicture.cs" />
     <Compile Include="Book.cs" />
+    <Compile Include="BookCover.cs" />
     <Compile Include="DataObject.cs" />
+    <Compile Include="File.cs" />
     <Compile Include="LibraryContext.cs" />
     <Compile Include="LibraryDbInitializer.cs" />
     <Compile Include="Migrations\201810051839468_First migration.cs" />
@@ -60,6 +63,14 @@
     <Compile Include="Migrations\201810071101002_Second migration.cs" />
     <Compile Include="Migrations\201810071101002_Second migration.Designer.cs">
       <DependentUpon>201810071101002_Second migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810111941363_ImageUpload.cs" />
+    <Compile Include="Migrations\201810111941363_ImageUpload.Designer.cs">
+      <DependentUpon>201810111941363_ImageUpload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810111944588_ImageUpload2.cs" />
+    <Compile Include="Migrations\201810111944588_ImageUpload2.Designer.cs">
+      <DependentUpon>201810111944588_ImageUpload2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +85,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810071101002_Second migration.resx">
       <DependentUpon>201810071101002_Second migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810111941363_ImageUpload.resx">
+      <DependentUpon>201810111941363_ImageUpload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810111944588_ImageUpload2.resx">
+      <DependentUpon>201810111944588_ImageUpload2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -20,5 +20,8 @@ namespace Library.Entities
 
         public int? AuthorId { get; set; }
         public virtual Author Author { get; set; }
+
+        public int? BookCoverId { get; set; }
+        public BookCover BookCover { get; set; }
     }
 }
