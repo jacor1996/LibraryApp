@@ -27,7 +27,7 @@ namespace Library.WebApplication
                 var adminRole = new IdentityRole("Admin");
                 roleManager.Create(adminRole);
 
-                var user = new ApplicationUser();
+                var user = new ApplicationUser {UserName = "admin@admin.com"};
                 user.Email = "admin@admin.com";
                 string adminPassword = "#Dupa123";
 

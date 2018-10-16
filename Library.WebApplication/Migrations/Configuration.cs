@@ -24,7 +24,30 @@ namespace Library.WebApplication.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
 
-            
+            //var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            //var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            //if (!roleManager.RoleExists("Admin"))
+            //{
+            //    var adminRole = new IdentityRole("Admin");
+            //    roleManager.Create(adminRole);
+            //}
+
+            //if (!roleManager.RoleExists("User"))
+            //{
+            //    var userRole = new IdentityRole("User");
+            //    roleManager.Create(userRole);
+            //}
+
+            //if (!context.Users.Any(u => u.Email == "admin@gmail.com"))
+            //{
+            //    var store = new UserStore<ApplicationUser>(context);
+            //    var manager = new UserManager<ApplicationUser>(store);
+            //    var user = new ApplicationUser { UserName = "admin@gmail.com" };
+   
+            //    manager.Create(user, "#Dupa123");
+            //    manager.AddToRole(user.Id, "Admin");
+            //}
             
         }
     }
