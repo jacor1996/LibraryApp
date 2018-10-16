@@ -215,6 +215,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810161815207_Initial.cs" />
+    <Compile Include="Migrations\201810161815207_Initial.Designer.cs">
+      <DependentUpon>201810161815207_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -322,6 +326,11 @@
       <Project>{98fbef2a-dfdf-48c0-904e-7a0df6c734a5}</Project>
       <Name>Library.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201810161815207_Initial.resx">
+      <DependentUpon>201810161815207_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

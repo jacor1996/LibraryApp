@@ -18,8 +18,5 @@ namespace Library.Entities
         public string Surname { get; set; }
 
         public ICollection<Book> Books { get; set; }
-
-        public int? AuthorPictureId { get; set; }
-        public virtual AuthorPicture AuthorPicture { get; set; }
     }
 }

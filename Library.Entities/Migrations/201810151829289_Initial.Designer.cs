@@ -7,13 +7,13 @@ namespace Library.Entities.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Secondmigration : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Secondmigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201810071101002_Second migration"; }
+            get { return "201810151829289_Initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -3,7 +3,7 @@ namespace Library.Entities.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Firstmigration : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -24,18 +24,18 @@ namespace Library.Entities.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Title = c.String(nullable: false, maxLength: 256),
                         Category = c.String(nullable: false, maxLength: 256),
-                        Author_Id = c.Int(),
+                        AuthorId = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Authors", t => t.Author_Id)
-                .Index(t => t.Author_Id);
+                .ForeignKey("dbo.Authors", t => t.AuthorId)
+                .Index(t => t.AuthorId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Books", "Author_Id", "dbo.Authors");
-            DropIndex("dbo.Books", new[] { "Author_Id" });
+            DropForeignKey("dbo.Books", "AuthorId", "dbo.Authors");
+            DropIndex("dbo.Books", new[] { "AuthorId" });
             DropTable("dbo.Books");
             DropTable("dbo.Authors");
         }

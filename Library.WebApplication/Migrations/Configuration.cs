@@ -23,15 +23,9 @@ namespace Library.WebApplication.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
-            if (!context.Users.Any(u => u.Email == "admin@gmail.com"))
-            {
-                var store = new UserStore<ApplicationUser>(context);
-                var manager = new UserManager<ApplicationUser>(store);
-                var user = new ApplicationUser { UserName = "admin@gmail.com" };
 
-                manager.Create(user, "#Dupa123");
-                manager.AddToRole(user.Id, "Admin");
-            }
+            
+            
         }
     }
 }
