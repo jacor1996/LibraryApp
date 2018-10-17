@@ -5,15 +5,19 @@ using System.Web;
 using System.Web.Mvc;
 using Library.Entities;
 using Library.Repositories.Interfaces;
+using Library.WebApplication.Services;
 
 namespace Library.WebApplication.Controllers
 {
     public class AuthorsController : Controller
     {
         private IRepository<Author> authorRepository;
+        private AuthorImageService authorImageService;
+
         public AuthorsController(IRepository<Author> repository)
         {
             authorRepository = repository;
+            authorImageService = new AuthorImageService();
         }
         // GET: Authors
         [AllowAnonymous]
@@ -35,6 +39,8 @@ namespace Library.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                string uploadPath = Server.MapPath("~/Files/Images/");
+                authorImageService.UpdateAuthorImageData(ref author, uploadPath);
                 authorRepository.Create(author);
                 authorRepository.Save();
 
@@ -63,6 +69,8 @@ namespace Library.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                string uploadPath = Server.MapPath("~/Files/Images/");
+                authorImageService.UpdateAuthorImageData(ref author, uploadPath);
                 authorRepository.Update(author);
                 authorRepository.Save();
 

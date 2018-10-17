@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Library.Entities
 {
@@ -18,5 +20,10 @@ namespace Library.Entities
         public string Surname { get; set; }
 
         public ICollection<Book> Books { get; set; }
+
+        [DisplayName("Author image")] 
+        public string ImagePath { get; set; }
+        [NotMapped]
+        public HttpPostedFileBase ImageFile { get; set; }
     }
 }

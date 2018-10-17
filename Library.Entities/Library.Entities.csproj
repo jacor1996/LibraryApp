@@ -62,6 +62,10 @@
     <Compile Include="Migrations\201810171634570_Book cover.Designer.cs">
       <DependentUpon>201810171634570_Book cover.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810171850341_Author image.cs" />
+    <Compile Include="Migrations\201810171850341_Author image.Designer.cs">
+      <DependentUpon>201810171850341_Author image.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -75,6 +79,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810171634570_Book cover.resx">
       <DependentUpon>201810171634570_Book cover.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810171850341_Author image.resx">
+      <DependentUpon>201810171850341_Author image.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
