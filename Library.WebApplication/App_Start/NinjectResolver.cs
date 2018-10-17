@@ -41,6 +41,7 @@ namespace Library.WebApplication.App_Start
             _kernel.Bind<IRepository<Book>>()
                 .To<Repository<Book>>()
                 .InRequestScope();
+
         }
     }
 }

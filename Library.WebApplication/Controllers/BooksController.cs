@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -36,7 +38,28 @@ namespace Library.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                //To Get File Extension  
+                string FileExtension = Path.GetExtension(book.ImageFile.FileName);
+
+                string FileName = book.Title + FileExtension;
+
+                //Get Upload path from Web.Config file AppSettings.  
+                string UploadPath = Server.MapPath("~/Files/Covers/");
+                if (!Directory.Exists(UploadPath))
+                {
+                    Directory.CreateDirectory(UploadPath);
+                }
+
+                //Its Create complete path to store in server.  
+                book.ImagePath = UploadPath + FileName;
+
+                //To copy and save file into server.  
+                book.ImageFile.SaveAs(book.ImagePath);
+
+                book.ImagePath = FileName;
+
                 bookRepository.Create(book);
+
                 bookRepository.Save();
 
                 return RedirectToAction("Index");
