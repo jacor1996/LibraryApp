@@ -61,10 +61,6 @@
       <Project>{00846781-dcc5-40ca-9567-dc29f803a02f}</Project>
       <Name>Library.Entities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Library.Services\Library.Services.csproj">
-      <Project>{98fbef2a-dfdf-48c0-904e-7a0df6c734a5}</Project>
-      <Name>Library.Services</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

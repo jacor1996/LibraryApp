@@ -225,6 +225,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BookCoverService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -324,10 +325,6 @@
     <ProjectReference Include="..\Library.Repositories\Library.Repositories.csproj">
       <Project>{c8d927cb-225d-47e1-874e-911473472c37}</Project>
       <Name>Library.Repositories</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Library.Services\Library.Services.csproj">
-      <Project>{98fbef2a-dfdf-48c0-904e-7a0df6c734a5}</Project>
-      <Name>Library.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

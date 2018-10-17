@@ -7,16 +7,19 @@ using System.Web;
 using System.Web.Mvc;
 using Library.Entities;
 using Library.Repositories.Interfaces;
+using Library.WebApplication.Services;
 
 namespace Library.WebApplication.Controllers
 {
     public class BooksController : Controller
     {
         private IRepository<Book> bookRepository;
+        private BookCoverService bookCoverService;
 
         public BooksController(IRepository<Book> repository)
         {
             bookRepository = repository;
+            bookCoverService = new BookCoverService();
         }
 
         // GET: Books
@@ -38,25 +41,9 @@ namespace Library.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                //To Get File Extension  
-                string FileExtension = Path.GetExtension(book.ImageFile.FileName);
+                string uploadPath = Server.MapPath("~/Files/Covers/");
 
-                string FileName = book.Title + FileExtension;
-
-                //Get Upload path from Web.Config file AppSettings.  
-                string UploadPath = Server.MapPath("~/Files/Covers/");
-                if (!Directory.Exists(UploadPath))
-                {
-                    Directory.CreateDirectory(UploadPath);
-                }
-
-                //Its Create complete path to store in server.  
-                book.ImagePath = UploadPath + FileName;
-
-                //To copy and save file into server.  
-                book.ImageFile.SaveAs(book.ImagePath);
-
-                book.ImagePath = FileName;
+                bookCoverService.UpdateBookCoverData(ref book, uploadPath);
 
                 bookRepository.Create(book);
 
@@ -86,6 +73,8 @@ namespace Library.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
+                string uploadPath = Server.MapPath("~/Files/Covers/");
+                bookCoverService.UpdateBookCoverData(ref book, uploadPath);
                 bookRepository.Update(book);
                 bookRepository.Save();
 
