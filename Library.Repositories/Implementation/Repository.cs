@@ -11,14 +11,15 @@ namespace Library.Repositories.Implementation
 {
     public class Repository<T> : IRepository<T> where T : DataObject
     {
-        private LibraryContext _context;
+        protected LibraryContext _context;
 
-        public Repository()
+        public Repository(LibraryContext context)
         {
-            _context = new LibraryContext();        
+            //_context = new LibraryContext();        
+            _context = context;
         }
 
-        public IEnumerable<T> GetAll()
+        public virtual IEnumerable<T> GetAll()
         {
             return _context.Set<T>();
         }
@@ -33,7 +34,7 @@ namespace Library.Repositories.Implementation
             _context.Set<T>().Add(entity);
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
         }

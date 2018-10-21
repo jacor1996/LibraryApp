@@ -6,7 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Library.Entities;
+using Library.Repositories.Implementation;
 using Library.Repositories.Interfaces;
+using Library.WebApplication.Models;
 using Library.WebApplication.Services;
 
 namespace Library.WebApplication.Controllers
@@ -14,11 +16,13 @@ namespace Library.WebApplication.Controllers
     public class BooksController : Controller
     {
         private IRepository<Book> bookRepository;
+        private IRepository<Author> authorRepository;
         private BookCoverService bookCoverService;
 
-        public BooksController(IRepository<Book> repository)
+        public BooksController(IRepository<Book> repository, IRepository<Author> authorRepository)
         {
             bookRepository = repository;
+            this.authorRepository = authorRepository;
             bookCoverService = new BookCoverService();
         }
 
@@ -32,36 +36,52 @@ namespace Library.WebApplication.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
+            ViewBag.Authors = PopulateAuthorsDropDownList();
             return View();
         }
-
+        
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult Create(Book book)
+        public ActionResult Create(BookViewModel model, HttpPostedFileBase ImageFile)
         {
+            ViewBag.Authors = PopulateAuthorsDropDownList();
+
             if (ModelState.IsValid)
             {
-                string uploadPath = Server.MapPath("~/Files/Covers/");
+                Book bookToCreate = model.Book;
+                Author author = authorRepository.GetById(model.SelectedAuthorId);
 
-                bookCoverService.UpdateBookCoverData(ref book, uploadPath);
+                bookToCreate.AuthorId = author.Id;
+                bookToCreate.Author = author;
 
-                bookRepository.Create(book);
+                if (ImageFile != null && ImageFile.ContentLength > 0)
+                {
+                    bookToCreate.ImageFile = ImageFile;
+                    string uploadPath = Server.MapPath("~/Files/Covers/");
+                    bookCoverService.UpdateBookCoverData(ref bookToCreate, uploadPath);
+                }
 
+                bookRepository.Create(bookToCreate);
                 bookRepository.Save();
 
                 return RedirectToAction("Index");
             }
 
-            return View(book);
+            return View(model);
         }
 
         [Authorize(Roles = "Admin")]
         public ActionResult Edit(int id)
         {
+            ViewBag.Authors = PopulateAuthorsDropDownList();
+            BookViewModel model = new BookViewModel();
             Book book = bookRepository.GetById(id);
-            if (book != null)
+            model.Book = book;
+            model.SelectedAuthorId =  book.AuthorId.GetValueOrDefault(1);
+
+            if (model.Book != null)
             {
-                return View(book);
+                return View(model);
             }
 
             return HttpNotFound($"Book with specified id = {id} does not exist.");
@@ -69,19 +89,37 @@ namespace Library.WebApplication.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public ActionResult Edit(Book book)
+        public ActionResult Edit(BookViewModel model, HttpPostedFileBase ImageFile, int id)
         {
+            ViewBag.Authors = PopulateAuthorsDropDownList();
             if (ModelState.IsValid)
             {
-                string uploadPath = Server.MapPath("~/Files/Covers/");
-                bookCoverService.UpdateBookCoverData(ref book, uploadPath);
-                bookRepository.Update(book);
+                Book bookToCreate = bookRepository.GetById(id);
+                
+                Author author = authorRepository.GetById(model.SelectedAuthorId);
+
+                bookToCreate.AuthorId = author.Id;
+                //bookToCreate.Author = author;
+                
+
+                if (ImageFile != null && ImageFile.ContentLength > 0)
+                {
+                    bookToCreate.ImageFile = ImageFile;
+                    string uploadPath = Server.MapPath("~/Files/Covers/");
+                    bookCoverService.UpdateBookCoverData(ref bookToCreate, uploadPath);
+                }
+
+                //string uploadPath = Server.MapPath("~/Files/Covers/");
+                //bookCoverService.UpdateBookCoverData(ref book, uploadPath);
+                //bookRepository.Update(bookToCreate);
+               // bookRepository.Save();
+                bookRepository.Update(bookToCreate);
                 bookRepository.Save();
 
                 return RedirectToAction("Index");
             }
 
-            return View(book);
+            return View(model);
         }
 
         [Authorize(Roles = "Admin")]
@@ -111,6 +149,19 @@ namespace Library.WebApplication.Controllers
             }
 
             return HttpNotFound($"Book with specified id = {id} does not exist.");
+        }
+
+         private IEnumerable<SelectListItem> PopulateAuthorsDropDownList()
+        {
+            var authors = authorRepository.GetAll()
+                .Select(n =>
+                    new SelectListItem()
+                    {
+                        Value = n.Id.ToString(),
+                        Text = $"{n.Name} {n.Surname}"
+                    }).ToList();
+
+            return new SelectList(authors, "Value", "Text");
         }
     }
 }

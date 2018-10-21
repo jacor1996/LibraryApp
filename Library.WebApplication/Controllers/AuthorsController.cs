@@ -39,8 +39,12 @@ namespace Library.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uploadPath = Server.MapPath("~/Files/Images/");
-                authorImageService.UpdateAuthorImageData(ref author, uploadPath);
+                if (author.ImageFile != null && author.ImageFile.ContentLength > 0)
+                {
+                    string uploadPath = Server.MapPath("~/Files/Images/");
+                    authorImageService.UpdateAuthorImageData(ref author, uploadPath);
+                }
+
                 authorRepository.Create(author);
                 authorRepository.Save();
 
@@ -69,8 +73,12 @@ namespace Library.WebApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uploadPath = Server.MapPath("~/Files/Images/");
-                authorImageService.UpdateAuthorImageData(ref author, uploadPath);
+                if (author.ImageFile != null && author.ImageFile.ContentLength > 0)
+                {
+                    string uploadPath = Server.MapPath("~/Files/Images/");
+                    authorImageService.UpdateAuthorImageData(ref author, uploadPath);
+                }
+
                 authorRepository.Update(author);
                 authorRepository.Save();
 
