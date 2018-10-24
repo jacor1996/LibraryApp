@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Library.Entities;
 using Library.Repositories.Interfaces;
+using Microsoft.AspNet.Identity;
 
 namespace Library.WebApplication.Controllers
 {
@@ -48,6 +49,8 @@ namespace Library.WebApplication.Controllers
             {
                 reservation = new Reservation();
                 reservation.ReservedBooks = new List<Book>();
+                var userName = HttpContext.User.Identity.GetUserName();
+                reservation.UserName = userName;
                 
                 Session["Reservation"] = reservation;
             }

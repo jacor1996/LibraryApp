@@ -6,6 +6,15 @@
 
 <h2>Index</h2>
 <table>
+    <tr>
+        <td>@Html.LabelFor(model => model.UserName)</td>
+        <td>@Model.UserName</td>
+    </tr>
+    
+    
+    <tr>
+        <td>Reserved books:</td>
+    </tr>
     @foreach (var r in Model.ReservedBooks)
     {
         <tr>
