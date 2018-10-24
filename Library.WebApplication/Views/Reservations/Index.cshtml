@@ -1,0 +1,17 @@
+﻿@model Library.Entities.Reservation
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<table>
+    @foreach (var r in Model.ReservedBooks)
+    {
+        <tr>
+            <td>@r.Title</td>
+            <td>@Html.ActionLink("Remove reservation", "RemoveBook")</td>
+        </tr>
+
+    }
+</table>

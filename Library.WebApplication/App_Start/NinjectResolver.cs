@@ -41,12 +41,12 @@ namespace Library.WebApplication.App_Start
                 .To<Repository<Author>>()
                 .InRequestScope();
 
-            //_kernel.Bind<IRepository<Book>>()
-            //    .To<Repository<Book>>()
-            //    .InRequestScope();
-
             _kernel.Bind<IRepository<Book>>()
                 .To<BooksRepository>()
+                .InRequestScope();
+
+            _kernel.Bind<IRepository<Reservation>>()
+                .To<Repository<Reservation>>()
                 .InRequestScope();
         }
     }
