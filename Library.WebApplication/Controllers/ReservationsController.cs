@@ -32,13 +32,26 @@ namespace Library.WebApplication.Controllers
         {
             Reservation reservation = GetReservation();
             Book reservedBook = booksRepository.GetById(bookId);
-            reservation.ReservedBooks.Add(reservedBook);
 
+            if (!reservation.ReservedBooks.Any(x => x.Id == bookId))
+            {
+                reservation.ReservedBooks.Add(reservedBook);
+            }
+            
             return RedirectToAction("Index");
         }
 
         public ActionResult RemoveBook(int id)
         {
+            Reservation reservation = GetReservation();
+
+            Book reservedBook = reservation.ReservedBooks.First(x => x.Id == id);
+
+            if (reservedBook != null)
+            {
+                reservation.ReservedBooks.Remove(reservedBook);
+            }
+
             return RedirectToAction("Index");
         }
 

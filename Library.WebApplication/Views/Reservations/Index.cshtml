@@ -13,14 +13,22 @@
     
     
     <tr>
-        <td>Reserved books:</td>
+        <td>
+            <b>Reserved books:</b>
+            @if (Model.ReservedBooks.Count == 0)
+            {
+                <p><b>No books reserved</b></p>
+            }
+        </td>
     </tr>
     @foreach (var r in Model.ReservedBooks)
     {
         <tr>
             <td>@r.Title</td>
-            <td>@Html.ActionLink("Remove reservation", "RemoveBook")</td>
+            <td>@Html.ActionLink("Remove reservation", "RemoveBook", new {id = r.Id})</td>
         </tr>
 
     }
 </table>
+
+<input type="button" name="reservation" value="Make reservation"/>
