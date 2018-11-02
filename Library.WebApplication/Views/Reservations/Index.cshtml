@@ -10,8 +10,8 @@
         <td>@Html.LabelFor(model => model.UserName)</td>
         <td>@Model.UserName</td>
     </tr>
-    
-    
+
+
     <tr>
         <td>
             <b>Reserved books:</b>
@@ -25,10 +25,10 @@
     {
         <tr>
             <td>@r.Title</td>
-            <td>@Html.ActionLink("Remove reservation", "RemoveBook", new {id = r.Id})</td>
+            <td>@Html.ActionLink("Remove reservation", "RemoveBook", new { id = r.Id })</td>
         </tr>
 
     }
 </table>
 
-<input type="button" name="reservation" value="Make reservation"/>
+@{ Html.RenderAction("Create");}

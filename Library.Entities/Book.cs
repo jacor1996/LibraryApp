@@ -27,5 +27,8 @@ namespace Library.Entities
         public string ImagePath { get; set; }
         [NotMapped]
         public HttpPostedFileBase ImageFile { get; set; }
+
+        public ICollection<Reservation> Reservations { get; set; }
+
     }
 }

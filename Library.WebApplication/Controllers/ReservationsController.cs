@@ -70,5 +70,21 @@ namespace Library.WebApplication.Controllers
 
             return reservation;
         }
+
+        public ActionResult Create()
+        {
+            Reservation reservation = GetReservation();
+            return View(reservation);
+        }
+
+        [HttpPost]
+        public void Create(Reservation reservation)
+        {
+            var reservedBooks = GetReservation().ReservedBooks;
+            reservation.UserName = HttpContext.User.Identity.GetUserName();
+            reservation.ReservedBooks = reservedBooks;
+            reservationsRepository.Create(reservation);
+            reservationsRepository.Save();
+        }
     }
 }

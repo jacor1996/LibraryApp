@@ -35,7 +35,8 @@ namespace Library.WebApplication.App_Start
         public void AddBindings()
         {
             _kernel.Bind<LibraryContext>()
-                .To<LibraryContext>();
+                .To<LibraryContext>()
+                .InSingletonScope();
 
             _kernel.Bind<IRepository<Author>>()
                 .To<Repository<Author>>()
