@@ -303,6 +303,7 @@
     <Content Include="Views\Books\Edit.cshtml" />
     <Content Include="Views\Reservations\Index.cshtml" />
     <Content Include="Views\Reservations\Create.cshtml" />
+    <Content Include="Views\Reservations\ListAll.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -86,5 +86,25 @@ namespace Library.WebApplication.Controllers
             reservationsRepository.Create(reservation);
             reservationsRepository.Save();
         }
+
+        public ActionResult ListAll()
+        {
+            var reservations = reservationsRepository.GetAll().ToList();
+            return View(reservations);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            Reservation reservation = reservationsRepository.GetById(id);
+
+            if (reservation != null)
+            {
+                reservationsRepository.Delete(id);
+                reservationsRepository.Save();
+                return RedirectToAction("ListAll");
+            }
+
+            return HttpNotFound("Reservation with specified id does not exist.");
+        }
     }
 }
